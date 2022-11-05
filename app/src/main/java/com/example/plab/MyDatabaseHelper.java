@@ -1,8 +1,10 @@
 package com.example.plab;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -29,7 +31,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                         " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         COLUMN_TITLE + " TEXT, " +
                         COLUMN_LESSON + " TEXT, " +
-                        COLUMN_STEPS + " INTEGER);";
+                        COLUMN_STEPS + " TEXT);";
         db.execSQL(query);
     }
 
@@ -37,5 +39,20 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
+    }
+
+    void addPractical(String title, String lesson, String steps) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_TITLE, title);
+        cv.put(COLUMN_LESSON, lesson);
+        cv.put(COLUMN_STEPS, steps);
+        long result = db.insert(TABLE_NAME, null, cv);
+        if(result == -1){
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, "Added Successfully", Toast.LENGTH_SHORT).show();
+        }
     }
 }

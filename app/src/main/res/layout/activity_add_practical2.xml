@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title_input" />
 
     <EditText
-        android:id="@+id/step_input"
+        android:id="@+id/steps_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -54,5 +54,5 @@
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/step_input" />
+        app:layout_constraintTop_toBottomOf="@+id/steps_input" />
 </androidx.constraintlayout.widget.ConstraintLayout>
