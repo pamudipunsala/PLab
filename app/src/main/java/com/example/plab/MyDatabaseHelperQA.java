@@ -67,10 +67,10 @@ public class MyDatabaseHelperQA extends SQLiteOpenHelper{
         return cursor;
     }
 
-    void updateQA(String row_id, String quwstion, String answer){
+    void updateQA(String row_id, String question, String answer){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(COLUMN_QUESTION, quwstion);
+        cv.put(COLUMN_QUESTION, question);
         cv.put(COLUMN_ANSWER, answer);
 
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});

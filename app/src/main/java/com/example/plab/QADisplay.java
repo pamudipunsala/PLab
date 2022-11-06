@@ -15,8 +15,9 @@ import androidx.annotation.Nullable;
         import android.view.View;
         import android.widget.ImageView;
         import android.widget.TextView;
+import android.widget.Toast;
 
-        import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
         import java.util.ArrayList;
 
@@ -28,8 +29,8 @@ public class QADisplay extends AppCompatActivity {
     TextView no_data;*/
 
     MyDatabaseHelperQA myDB;
-   // ArrayList<String> bus_id, bus_busid, bus_stime, bus_etime;
-   // CustomAdapter customAdapter;
+    ArrayList<String> qa_id, qa_question, qa_answer;
+    CustomAdapterQA customAdapterQA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,18 +49,16 @@ public class QADisplay extends AppCompatActivity {
             }
         });
 
-    /*    myDB = new MyDatabaseHelperQA(QADisplay.this);
-        bus_id = new ArrayList<>();
-        bus_busid = new ArrayList<>();
-        bus_stime = new ArrayList<>();
-        bus_etime = new ArrayList<>();
+        myDB = new MyDatabaseHelperQA(QADisplay.this);
+        qa_id = new ArrayList<>();
+        qa_question = new ArrayList<>();
+        qa_answer = new ArrayList<>();
 
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(MainActivity.this,this, bus_id, bus_busid, bus_stime,
-                bus_etime);
-        recyclerView.setAdapter(customAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));*/
+        customAdapterQA = new CustomAdapterQA(QADisplay.this,this, qa_id,qa_question, qa_answer);
+        qarecyclerview.setAdapter(customAdapterQA);
+        qarecyclerview.setLayoutManager(new LinearLayoutManager(QADisplay.this));
     }
 /*
     @Override
@@ -70,24 +69,25 @@ public class QADisplay extends AppCompatActivity {
         }
     }
 
-
+*/
     void storeDataInArrays(){
         Cursor cursor = myDB.readAllData();
         if(cursor.getCount() == 0){
-            empty_imageview.setVisibility(View.VISIBLE);
-            no_data.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
+           // empty_imageview.setVisibility(View.VISIBLE);
+            //no_data.setVisibility(View.VISIBLE);
         }else{
             while (cursor.moveToNext()){
-                bus_id.add(cursor.getString(0));
-                bus_busid.add(cursor.getString(1));
-                bus_stime.add(cursor.getString(2));
-                bus_etime.add(cursor.getString(3));
+                //z.add(cursor.getString(0));
+                qa_id.add(cursor.getString(0));
+                qa_answer.add(cursor.getString(1));
+                qa_question.add(cursor.getString(2));
             }
-            empty_imageview.setVisibility(View.GONE);
-            no_data.setVisibility(View.GONE);
+            //empty_imageview.setVisibility(View.GONE);
+            //no_data.setVisibility(View.GONE);
 
         }
-    }
+    }/*
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
