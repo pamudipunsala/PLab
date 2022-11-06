@@ -3,6 +3,7 @@ package com.example.plab;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,17 +47,16 @@ public class CustomAdapterQA extends RecyclerView.Adapter<CustomAdapterQA.MyView
         holder.question_txt.setText(String.valueOf(qa_question.get(position)));
         holder.answer_txt.setText(String.valueOf(qa_answer.get(position)));
 
-        /*holder.mainLayout.setOnClickListener(new View.OnClickListener() {
+        holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(context, UpdateActivity.class);
-                intent.putExtra("id", String.valueOf(bus_id.get(position)));
-                intent.putExtra("busid", String.valueOf(bus_busid.get(position)));
-                intent.putExtra("stime", String.valueOf(bus_stime.get(position)));
-                intent.putExtra("etime", String.valueOf(bus_etime.get(position)));
+                Intent intent= new Intent(context, UpdateQA.class);
+                intent.putExtra("id", String.valueOf(qa_id.get(position)));
+                intent.putExtra("question", String.valueOf(qa_question.get(position)));
+                intent.putExtra("answer", String.valueOf(qa_answer.get(position)));
                 activity.startActivityForResult(intent, 1);
             }
-        });*/
+        });
 
     }
 
@@ -68,6 +68,7 @@ public class CustomAdapterQA extends RecyclerView.Adapter<CustomAdapterQA.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView qa_id_txt,question_txt, answer_txt;
+        LinearLayout mainLayout;
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -75,6 +76,7 @@ public class CustomAdapterQA extends RecyclerView.Adapter<CustomAdapterQA.MyView
             qa_id_txt = itemView.findViewById(R.id.qa_id_txt);
             question_txt = itemView.findViewById(R.id.question_txt);
             answer_txt = itemView.findViewById(R.id.answer_txt);
+            mainLayout = itemView.findViewById(R.id.mainLayout);
 
         }
     }
