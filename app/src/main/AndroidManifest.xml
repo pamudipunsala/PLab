@@ -31,8 +31,13 @@
         </activity>
         <activity
             android:name=".QADisplay"
-            android:exported="false"
+            android:exported="true"
             android:label="QnA Blog">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -50,11 +55,7 @@
             android:name=".AddPractical"
             android:exported="true"
             android:label="Practicals">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"
