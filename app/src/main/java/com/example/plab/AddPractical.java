@@ -1,5 +1,6 @@
 package com.example.plab;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,10 +49,18 @@ public class AddPractical extends AppCompatActivity {
 
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(AddPractical.this, prac_id, prac_title, prac_lesson, prac_steps);
+        customAdapter = new CustomAdapter(AddPractical.this, this, prac_id, prac_title, prac_lesson, prac_steps);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(AddPractical.this));
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            recreate();
+        }
     }
 
     void storeDataInArrays(){
