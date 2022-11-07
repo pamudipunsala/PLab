@@ -9,30 +9,34 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-public class MyDatabaseHelper extends SQLiteOpenHelper {
+public class MyDatabaseHelperReg extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "PhyPractical.db";
     private static final int DATABASE_VERSION = 1;
 
-    private static final String TABLE_NAME = "phy_practical";
+    private static final String TABLE_NAME = "st_tch_reg";
     private static final String COLUMN_ID = "_id";
-    private static final String COLUMN_TITLE = "prac_title";
-    private static final String COLUMN_LESSON = "prac_lesson";
-    private static final String COLUMN_STEPS = "prac_steps";
+    private static final String COLUMN_NAME = "name";
+    private static final String COLUMN_EMAIL = "email";
+    private static final String COLUMN_USER_TYPE = "user_type";
+    private static final String COLUMN_USER_NAME = "user_name";
+    private static final String COLUMN_PASSWORD = "password";
 
-    MyDatabaseHelper(@Nullable Context context) {
-        super(context, DATABASE_NAME , null, DATABASE_VERSION);
+    public MyDatabaseHelperReg(@Nullable Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_NAME +
-                " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_TITLE + " TEXT, " +
-                COLUMN_LESSON + " TEXT, " +
-                COLUMN_STEPS + " TEXT);";
+                        " (" + COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        COLUMN_NAME + " TEXT, " +
+                        COLUMN_EMAIL + " TEXT, " +
+                        COLUMN_USER_TYPE + " TEXT, " +
+                        COLUMN_USER_NAME + " TEXT, " +
+                        COLUMN_PASSWORD + " TEXT ); ";
         db.execSQL(query);
     }
 
@@ -42,13 +46,15 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addPractical(String title, String lesson, String steps) {
+    void addStTchDetails(String name, String email, String utype, String uname, String pwd) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_TITLE, title);
-        cv.put(COLUMN_LESSON, lesson);
-        cv.put(COLUMN_STEPS, steps);
+        cv.put(COLUMN_NAME, name);
+        cv.put(COLUMN_EMAIL, email);
+        cv.put(COLUMN_USER_TYPE, utype);
+        cv.put(COLUMN_USER_NAME, uname);
+        cv.put(COLUMN_PASSWORD, pwd);
         long result = db.insert(TABLE_NAME, null, cv);
         if(result == -1){
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
@@ -68,12 +74,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    void updateData(String row_id, String title, String lesson, String steps){
+    void updateData(String row_id, String name, String email, String utype, String uname, String pwd){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(COLUMN_TITLE, title);
-        cv.put(COLUMN_LESSON, lesson);
-        cv.put(COLUMN_STEPS, steps);
+        cv.put(COLUMN_NAME, name);
+        cv.put(COLUMN_EMAIL, email);
+        cv.put(COLUMN_USER_TYPE, utype);
+        cv.put(COLUMN_USER_NAME, uname);
+        cv.put(COLUMN_PASSWORD, pwd);
 
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
         if(result == -1){
