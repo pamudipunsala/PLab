@@ -25,8 +25,7 @@ public class QADisplay extends AppCompatActivity {
 
     RecyclerView qarecyclerview;
     FloatingActionButton addquestions;
-    /*ImageView empty_imageview;
-    TextView no_data;*/
+
 
     MyDatabaseHelperQA myDB;
     ArrayList<String> qa_id, qa_question, qa_answer;
@@ -39,8 +38,7 @@ public class QADisplay extends AppCompatActivity {
 
         qarecyclerview = findViewById(R.id.qarecyclerview);
         addquestions = findViewById(R.id.addquestions);
-       /* empty_imageview = findViewById(R.id.empty_imageview);
-        no_data = findViewById(R.id.no_data);*/
+
         addquestions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,7 +58,7 @@ public class QADisplay extends AppCompatActivity {
         qarecyclerview.setAdapter(customAdapterQA);
         qarecyclerview.setLayoutManager(new LinearLayoutManager(QADisplay.this));
     }
-/*
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -69,26 +67,22 @@ public class QADisplay extends AppCompatActivity {
         }
     }
 
-*/
+
     void storeDataInArrays(){
         Cursor cursor = myDB.readAllData();
         if(cursor.getCount() == 0){
             Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
-           // empty_imageview.setVisibility(View.VISIBLE);
-            //no_data.setVisibility(View.VISIBLE);
+
         }else{
             while (cursor.moveToNext()){
-                //z.add(cursor.getString(0));
                 qa_id.add(cursor.getString(0));
                 qa_answer.add(cursor.getString(1));
                 qa_question.add(cursor.getString(2));
             }
-            //empty_imageview.setVisibility(View.GONE);
-            //no_data.setVisibility(View.GONE);
+
 
         }
-    }/*
-
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -98,22 +92,12 @@ public class QADisplay extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.menubook){
-            Intent intent= new Intent(MainActivity.this, Bookings.class);
-            startActivity(intent);
-        }else if(item.getItemId() == R.id.menutimetable){
-            Intent intent= new Intent(MainActivity.this, MainActivity.class);
-            startActivity(intent);
-
-        }else if(item.getItemId() == R.id.menureview){
-            Intent intent= new Intent(MainActivity.this, ReviewList.class);
-            startActivity(intent);
-        }else if(item.getItemId() == R.id.menupackage){
-            Intent intent= new Intent(MainActivity.this, Package.class);
+        if(item.getItemId() == R.id.menu){
+            Intent intent= new Intent(QADisplay.this, QADisplay.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 
 
 }

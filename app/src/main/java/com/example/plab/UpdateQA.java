@@ -37,7 +37,7 @@ public class UpdateQA extends AppCompatActivity {
         //Set actionbar title after getAndSetIntentData method
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setTitle(question);
+            ab.setTitle(id);
         }
 
         qupdatebtn.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +102,8 @@ public class UpdateQA extends AppCompatActivity {
             }
         });
         builder.create().show();
-    }/*
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -112,19 +113,12 @@ public class UpdateQA extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.menubook){
-            Intent intent= new Intent(UpdateActivity.this, Bookings.class);
-            startActivity(intent);
-        }else if(item.getItemId() == R.id.menutimetable){
-            Intent intent= new Intent(UpdateActivity.this, MainActivity.class);
-            startActivity(intent);
-
-        }else if(item.getItemId() == R.id.menureview){
-            Intent intent= new Intent(UpdateActivity.this, ReviewList.class);
+        if(item.getItemId() == R.id.menu){
+            Intent intent= new Intent(UpdateQA.this, QADisplay.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 
 
 
